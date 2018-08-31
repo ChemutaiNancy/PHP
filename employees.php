@@ -16,12 +16,16 @@
     </style>
 </head>
 <body>
+
+<?php
+    include "nav_employee.php";
+?>
 <div class="container">
     <h2>Employees Data</h2>
     <input type="text" id="input" class="form-control" placeholder="Search..">
     <br>
     <div class="col-sm-12">
-        <table class="table table-success table-bordered" id="emp">
+        <table class="table table-danger table-bordered" id="emp">
             <tr>
                 <th>Employee_id</th>
                 <th>Names</th>
@@ -30,12 +34,15 @@
                 <th>Phone_no</th>
                 <th>Dob</th>
                 <th>Salary</th>
+                <th>Remove</th>
+                <th>Update</th>
             </tr>
 
 
 
             <?php
-            $conn = mysqli_connect("localhost", "root", "", "school");
+
+            include "school_conn.php";
 
             //prepare the sql query
 
@@ -58,6 +65,9 @@
                             <td>$phone_no</td>
                             <td>$dob</td>
                             <td>$salary</td>
+                            <td><a href='remove.php?id=$employee_id'class='btn btn-danger btn-lg'><span class='glyphicon'>
+                                </span><img src='img/delete.png' style='width: 30px; height: 30px'></a></td>
+                             <td><a class='btn btn-success btn-sm' href='update_employee.php?id=$employee_id'>Update Employee</a></td>
                         </tr>";
 
                 //employees

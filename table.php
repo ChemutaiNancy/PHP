@@ -9,19 +9,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
+
+<?php
+    include ("nav.php");
+?>
     <div class="container">
-        <div class="col-sm-6">
+        <div class="row justify-content-center">
+        <div class="col-sm-12">
             <table class="table table-active">
                 <tr>
-                    <th>User_id</th>
+                    <th>User id</th>
                     <th>Names</th>
                     <th>Email</th>
+                    <th>Delete</th>
+                    <th class="text-center">Secure Password</th>
+                    <th>Update</th>
                 </tr>
 
 
 
                 <?php
-                $conn = mysqli_connect("localhost", "root", "", "mydb");
+                require ("mydb_conn.php");
 
                 //prepare the sql query
 
@@ -36,10 +44,16 @@
                 while ($row = mysqli_fetch_assoc($results))
                 {
                     extract($row);//creates variables for each column
+
+                    $x = $status == 1? 'disabled': '';//if statement
+
                     echo "<tr>
-                            <td>$user_id</td>
+                            <td class='text-center'>$user_id</td>
                             <td>$names</td>
                             <td>$email</td>
+                            <td><a class='btn btn-info btn-sm' href='delete.php?id=$user_id'>Delete</a></td>
+                            <td class='text-center'><a class='btn btn-primary btn-sm $x ' href='secure.php?id=$user_id'>Secure</a></td>
+                            <td><a class='btn btn-success btn-sm' href='update.php?id=$user_id'>Update</a></td>
                         </tr>";
 
                     //employees
@@ -49,6 +63,8 @@
             </table>
         </div>
     </div>
+    </div>
+
 </body>
 </html>
 
